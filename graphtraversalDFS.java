@@ -1,6 +1,7 @@
+import java.beans.Visibility;
 import java.util.*;
 
-public class graphtraversalBFS {
+public class graphtraversalDFS {
 
     static class edge{
         int src;
@@ -53,23 +54,23 @@ public class graphtraversalBFS {
        
     }
 
-    public  static void bfs(ArrayList<edge>[] graph){   // O(V+E) || in metrix O(V^2)
-        Queue<Integer> q=new LinkedList<>();
-        boolean[] vis=new boolean[graph.length];
+    public static void dfs(ArrayList<edge>[] graph,int curr,boolean[] vis){  //O(V+E)
 
-        q.add(0);
+        //visit
+        System.out.println(curr+" ");
+        vis[curr]=true;
 
-        while(!q.isEmpty()){
-            int curr=q.remove();
-            if(!vis[curr]){  //visit current
-              System.out.println("Print the current: "+ curr);
-              vis[curr]=true;
-              for (int i = 0; i < graph[curr].size(); i++) {
-                  edge e=graph[curr].get(i);
-                  q.add(e.desc);
-              }
+        for (int i = 0; i < graph[curr].size(); i++) {
+
+            edge e=graph[curr].get(i);
+            if(!vis[e.desc]){
+                dfs(graph, e.desc, vis);
             }
+            
         }
+
+
+        
 
     }
 
@@ -87,11 +88,13 @@ public class graphtraversalBFS {
 
         /*decler array tha is ArrayList<edge>  */
         ArrayList<edge> graph[]=new ArrayList[7];
+        boolean[] vis=new boolean[7];
 
         //Call the graphcreate method
         creategraph(graph);
-        bfs(graph);
+        dfs(graph, 0, vis);
         
     }
     
 }
+

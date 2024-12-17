@@ -19,7 +19,6 @@ public class graphconcept {
         //Number vertex(v) size of array
         int V=5;
         //Create an adjacency list
-        @SuppressWarnings("unchecked")
         List<Edge>[] graph=new ArrayList[V];
 
         //Initialize adjacency list for each vertex
