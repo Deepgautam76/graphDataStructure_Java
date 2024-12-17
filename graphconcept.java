@@ -9,8 +9,8 @@ public class graphconcept {
         int dest;
         int wait;
         public Edge(int s,int d,int w){
-            this.dest=d;
             this.src=s;
+            this.dest=d;
             this.wait=w;
         }
     }
@@ -19,8 +19,10 @@ public class graphconcept {
         //Number vertex(v) size of array
         int V=5;
         //Create an adjacency list
-        ArrayList<Edge>[] graph=new ArrayList[V];
+        @SuppressWarnings("unchecked")
+        List<Edge>[] graph=new ArrayList[V];
 
+        //Initialize adjacency list for each vertex
         for (int i=0; i<V; i++){
             graph[i]=new ArrayList<>();
         }
@@ -50,9 +52,10 @@ public class graphconcept {
         for(int i=0; i<graph[2].size(); i++){
             Edge e=graph[2].get(i);
             //Print all destination value that is the neighbors
-            System.out.println(e.dest);
+            System.out.println("Vertex:"+e.dest+", Weight"+e.wait);
         }
-        System.out.println("hello");
+
+        System.out.println("Graph constructed successfully!");
 
     }
 }
