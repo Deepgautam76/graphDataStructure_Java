@@ -5,12 +5,12 @@ public class graphtraversalDFS {
 
     static class edge{
         int src;
-        int desc;
+        int dest;
         int wt;
 
         edge(int s,int d,int w){
             this.src=s;
-            this.desc=d;
+            this.dest=d;
             this.wt=w;
         }
     }
@@ -63,15 +63,33 @@ public class graphtraversalDFS {
         for (int i = 0; i < graph[curr].size(); i++) {
 
             edge e=graph[curr].get(i);
-            if(!vis[e.desc]){
-                dfs(graph, e.desc, vis);
+            if(!vis[e.dest]){
+                dfs(graph, e.dest, vis);
             }
             
         }
+    }
 
+    
 
-        
+    //Has path problem  O(V+E)
+    public static boolean hasPath(ArrayList<edge>[] graph,int src,int dest,boolean vis[]){
 
+       if(src==dest){
+        return true;
+       }
+
+       vis[src]=true;
+
+       for(int i=0; i<graph[src].size(); i++){
+        edge e=graph[src].get(i);
+
+        //e.dest=neighbour
+        if(!vis[e.dest] && hasPath(graph, e.dest, dest, vis)){
+            return true;
+         }
+       }
+        return false;
     }
 
     public static void main(String[] args) {
@@ -92,7 +110,9 @@ public class graphtraversalDFS {
 
         //Call the graphcreate method
         creategraph(graph);
-        dfs(graph, 0, vis);
+        // dfs(graph, 0, vis);
+        boolean hn=hasPath(graph, 0, 5, vis);
+        System.out.println("Has path from 0 to 5 : "+hn);
         
     }
     
